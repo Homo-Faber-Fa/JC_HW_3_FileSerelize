@@ -1,4 +1,3 @@
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,54 +6,99 @@ public class MainSetUp {
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder();
 
-        //HW JC №3 Задача 1: Установка
+        //HW JC №3 Задача 1: Установка поправил 20.04.2024
+        addDirectoryFiles(sb);
+        
+        sendLod("C:\\Java\\Java Core\\HW 3 File\\Games\\temp\\temp.txt", sb);
+        System.out.println(sb);
 
-        File dir = new File("Games");  if (dir.mkdir())  sb.append(" Games каталог создан \n");
-        File dir1 = new File("Games/src");  if (dir1.mkdir()) sb.append(" Games/src каталог создан \n");
-        File dir2 = new File("Games/res");  if (dir2.mkdir()) sb.append(" Games/res каталог создан \n");
-        File dir3 = new File("Games/savegames");  if (dir3.mkdir()) sb.append(" Games/savegames каталог создан \n");
-        File dir4 = new File("Games/temp");  if (dir4.mkdir()) sb.append(" Games/temp каталог создан \n");
-        File dir5 = new File("Games/src/main");  if (dir5.mkdir()) sb.append(" Games/src/main каталог создан \n");
-        File dir6 = new File("Games/src/test");  if (dir6.mkdir()) sb.append(" Games/src/test каталог создан \n");
+    }
+        public static void addDirectoryFiles(StringBuilder sb) {
+            sb.append(" Games ");
 
+            String loger;
 
-
-
-
-        File myFile0 = new File("Games/src/main/Main.java");
-        try { if (myFile0.createNewFile())
-            sb.append(" Main.java файл был создан \n");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());}
-
-        File myFile1 = new File("Games/src/main/Utils.java");
-        try { if (myFile1.createNewFile())
-            sb.append(" Utils.java файл был создан \n");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());}
-
-        File myFile2 = new File("Games/temp/temp.txt");
-        try { if (myFile2.createNewFile())
-            sb.append(" temp.txt файл был создан \n");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());}
+            loger = "Games\\src\\main";
+            File dir = new File(loger);
+            if (dir.mkdirs()) ;
+            sb.append("Создан каталог ").append(loger).append("\n");
 
 
-        System.out.println(sb.toString());
+            loger = "Games\\src\\main\\Main.java";
+            File myFile0 = new File(loger);
+            try {
+                if (myFile0.createNewFile());
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+            sb.append("Создан файл ").append(loger).append("\n");
 
 
-        String text = sb.toString();
-        byte[] buffer = text.getBytes();
-// создаем выходной байтовый поток
-// и передаем его в выходной буферизированный поток
-        try (FileOutputStream out = new FileOutputStream("Games\\temp\\temp.txt");
-             BufferedOutputStream bos = new BufferedOutputStream(out)) {
-            // производим запись от 0 до последнего байта из массива
-            bos.write(buffer, 0, buffer.length);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            loger = "Games\\src\\main\\Utils.java";
+            File myFile1 = new File(loger);
+            try {
+                if (myFile1.createNewFile());
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+            sb.append("Создан файл ").append(loger).append("\n");
+
+            loger = "Games\\src\\test";
+            File dir1 = new File(loger);
+            if (dir1.mkdirs()) ;
+            sb.append("Создан каталог ").append(loger).append("\n");
+
+            loger = "Games\\temp";
+            File dir2 = new File(loger);
+            if (dir2.mkdirs()) ;
+            sb.append("Создан каталог ").append(loger).append("\n");
+
+            loger = "Games\\temp\\temp.txt";
+            File myFile2 = new File(loger);
+            try {
+                if (myFile2.createNewFile())
+                    ;
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+            sb.append("Создан файл ").append(loger).append("\n");
+
+            loger = "Games\\savegames";
+            File dir3 = new File(loger);
+            if (dir3.mkdirs()) ;
+            sb.append("Создан каталог ").append(loger).append("\n");
+
+
+
+            loger = "Games\\res\\drawables";
+            File dir4 = new File(loger);
+            if (dir4.mkdirs()) ;
+            sb.append("Создан каталог ").append(loger).append("\n");
+
+            loger = "Каталог создан Games\\res\\vectors";
+            File dir5 = new File(loger);
+            if (dir5.mkdirs()) ;
+            sb.append("Создан каталог ").append(loger).append("\n");
+
+            loger = "Каталог создан Games\\res\\icons";
+            File dir6 = new File(loger);
+            if (dir6.mkdirs()) ;
+            sb.append("Создан каталог ").append(loger).append("\n");
+
+
+
+            System.out.println(sb.toString());
+    }
+
+
+
+
+    public static void sendLod(String path, StringBuilder sb) {
+        try (FileOutputStream fos = new FileOutputStream(path)) {
+            byte[] bytes = sb.toString().getBytes();
+            fos.write(bytes, 0, bytes.length);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
-
     }
 }
