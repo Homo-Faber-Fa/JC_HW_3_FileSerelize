@@ -5,92 +5,39 @@ import java.io.IOException;
 public class MainSetUp {
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder();
+        //HW JC №3 Задача 1: Установка поправил 25.04.2024
 
-        //HW JC №3 Задача 1: Установка поправил 20.04.2024
-        addDirectoryFiles(sb);
-        
-        sendLod("C:\\Java\\Java Core\\HW 3 File\\Games\\temp\\temp.txt", sb);
-        System.out.println(sb);
+        createDirectory(sb, "Games\\src\\main"); // C:\Java\Java Core\HW 3 File\
+        createDirectory(sb, "Games\\src\\test");
+        createDirectory(sb, "Games\\temp");
+        createDirectory(sb, "Games\\savegames");
+        createDirectory(sb, "Games\\res\\vectors");
+        createDirectory(sb, "Games\\res\\icons");
+        createFile(sb, "Games\\src\\main\\Main.java");
+        createFile(sb, "Games\\src\\main\\Utils.java");
+        createFile(sb, "Games\\temp\\temp.txt");
+
+        sendLod("Games\\temp\\temp.txt", sb);// C:\Java\Java Core\HW 3 File\
+
+        System.out.println(sb.toString());
+
 
     }
-        public static void addDirectoryFiles(StringBuilder sb) {
-            sb.append(" Games ");
-
-            String loger;
-
-            loger = "Games\\src\\main";
-            File dir = new File(loger);
-            if (dir.mkdirs()) ;
-            sb.append("Создан каталог ").append(loger).append("\n");
-
-
-            loger = "Games\\src\\main\\Main.java";
-            File myFile0 = new File(loger);
-            try {
-                if (myFile0.createNewFile());
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-            sb.append("Создан файл ").append(loger).append("\n");
-
-
-            loger = "Games\\src\\main\\Utils.java";
-            File myFile1 = new File(loger);
-            try {
-                if (myFile1.createNewFile());
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-            sb.append("Создан файл ").append(loger).append("\n");
-
-            loger = "Games\\src\\test";
-            File dir1 = new File(loger);
-            if (dir1.mkdirs()) ;
-            sb.append("Создан каталог ").append(loger).append("\n");
-
-            loger = "Games\\temp";
-            File dir2 = new File(loger);
-            if (dir2.mkdirs()) ;
-            sb.append("Создан каталог ").append(loger).append("\n");
-
-            loger = "Games\\temp\\temp.txt";
-            File myFile2 = new File(loger);
-            try {
-                if (myFile2.createNewFile())
-                    ;
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-            sb.append("Создан файл ").append(loger).append("\n");
-
-            loger = "Games\\savegames";
-            File dir3 = new File(loger);
-            if (dir3.mkdirs()) ;
-            sb.append("Создан каталог ").append(loger).append("\n");
-
-
-
-            loger = "Games\\res\\drawables";
-            File dir4 = new File(loger);
-            if (dir4.mkdirs()) ;
-            sb.append("Создан каталог ").append(loger).append("\n");
-
-            loger = "Каталог создан Games\\res\\vectors";
-            File dir5 = new File(loger);
-            if (dir5.mkdirs()) ;
-            sb.append("Создан каталог ").append(loger).append("\n");
-
-            loger = "Каталог создан Games\\res\\icons";
-            File dir6 = new File(loger);
-            if (dir6.mkdirs()) ;
-            sb.append("Создан каталог ").append(loger).append("\n");
-
-
-
-            System.out.println(sb.toString());
+    public static void createFile(StringBuilder sb, String loger) {
+        File myFile0 = new File(loger);
+        try {
+            if (myFile0.createNewFile());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        sb.append("Создан файл ").append(loger).append("\n");
     }
-
-
+    public static void createDirectory(StringBuilder sb, String loger) {
+        System.out.println(loger);
+        File dir = new File(loger);
+        if (dir.mkdirs()) ;
+        sb.append("Создан каталог ").append(loger).append("\n");
+    }
 
 
     public static void sendLod(String path, StringBuilder sb) {
