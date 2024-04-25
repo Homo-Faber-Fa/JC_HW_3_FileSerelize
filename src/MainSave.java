@@ -55,7 +55,7 @@ public class MainSave {
                 try {
                     FileInputStream fips = new FileInputStream(x);
                     sb.setLength(0);
-                    sb.append(x).replace(0, 19, "zip_");
+                    sb.append(x).replace(0, 19, "sa");
                     ZipEntry entry = new ZipEntry(String.valueOf(sb));
                     arhops.putNextEntry(entry);
                     byte[] buffer = new byte[fips.available()];
