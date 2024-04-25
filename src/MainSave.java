@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,18 +6,19 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class MainSave {
+    //HW JC №3 Задача 2: Сохранение поправлено 25.04.2024
     public static void main(String[] args) {
         List<GameProgress> listGameProgress = new ArrayList<>(); // сформирован объект массива содержащий переменные типа GameProgress
         Collections.addAll(listGameProgress,                     // добавление объектов массива
                 new GameProgress(11, 12, 13, 1.4),
                 new GameProgress(21, 22, 23, 2.4),
                 new GameProgress(31, 32, 33, 3.4));
-                                                    // сформированы три объекта типа GameProgress
+        // сформированы три объекта типа GameProgress
 
         List<String> fileNameAPathFiles = saveGames("Games/savegames/", listGameProgress); // запуск saveGame  Запуск передает в метод путь папки и Массив GameProgress
-        //C:\Java\Java Core\HW 3 File\Games\savegames\
 
-        zipFiles("Games/savegames/", fileNameAPathFiles);           // запуск zipFiles   Запуск передает в метод путь папки и Имена файлов
+
+        zipFiles("", fileNameAPathFiles);           // запуск zipFiles   Запуск передает в метод путь папки и Имена файлов
 
         deleteFiles(fileNameAPathFiles);
     }
@@ -31,12 +31,14 @@ public class MainSave {
 
         for (int i = 0; i < list.size(); i++) {
             GameProgress gameProgress = list.get(i);
-                stringBuilder.append(path).append("/save").append(i+1).append(".dat"); // Цикл формирования имени файла включая путь и расширение (отдельный оборот для каждого файла)
+            stringBuilder.append(path).append("/save").append(i + 1).append(".dat"); // Цикл формирования имени файла включая путь и расширение (отдельный оборот для каждого файла)
 
             try (FileOutputStream fos = new FileOutputStream(String.valueOf(stringBuilder));
                  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(gameProgress);
-            } catch (IOException e) { e.getMessage();}
+            } catch (IOException e) {
+                e.getMessage();
+            }
 
             pathToZip.add(String.valueOf(stringBuilder));
 
@@ -47,7 +49,7 @@ public class MainSave {
 
     public static void zipFiles(String pathToDirectory, List<String> pathToFiles) {
 
-        StringBuilder sb = new StringBuilder().append(pathToDirectory).append("/.zip");
+        StringBuilder sb = new StringBuilder().append(pathToDirectory).append("savegames.zip");
         try (ZipOutputStream arhops = new ZipOutputStream(new FileOutputStream(String.valueOf(sb)))) {
             pathToFiles.stream().forEach(x -> {
                 try {
@@ -79,6 +81,8 @@ public class MainSave {
                 count = count + 1;
             }
         }
-        if (count == 3) { System.out.println("файлы удалены");}
+        if (count == 3) {
+            System.out.println("файлы удалены");
+        }
     }
 }
