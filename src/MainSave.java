@@ -6,7 +6,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class MainSave {
-    //HW JC №3 Задача 2: Сохранение поправлено 25.04.2024
+    //HW JC №3 Задача 2: поправлено 02.05.2024
     public static void main(String[] args) {
         List<GameProgress> listGameProgress = new ArrayList<>(); // сформирован объект массива содержащий переменные типа GameProgress
         Collections.addAll(listGameProgress,                     // добавление объектов массива
@@ -46,10 +46,10 @@ public class MainSave {
         }
         return pathToZip;
     }
-
+    //   1 вар
     public static void zipFiles(String pathToDirectory, List<String> pathToFiles) {
 
-        StringBuilder sb = new StringBuilder().append(pathToDirectory).append("savegames.zip");
+        StringBuilder sb = new StringBuilder().append(pathToDirectory).append("Games\\savegames\\zip.zip");
         try (ZipOutputStream arhops = new ZipOutputStream(new FileOutputStream(String.valueOf(sb)))) {
             pathToFiles.stream().forEach(x -> {
                 try {
@@ -72,6 +72,34 @@ public class MainSave {
         }
 
     }
+
+    //   др вар
+//    public static void zipFiles(String pathToDirectory, List<String> pathToFiles) {
+//       // int count;
+//        StringBuilder sb = new StringBuilder().append(pathToDirectory).append("C:\\Java\\Java Core\\HW 3 File\\src\\Games\\savegames"); //"/zip_out.zip"
+//        try (ZipOutputStream zops = new ZipOutputStream(new FileOutputStream(String.valueOf(sb)))) {
+//            pathToFiles.stream().forEach(x -> {
+//                try {
+//                    FileInputStream fips = new FileInputStream(x);
+//                    sb.setLength(0);
+//                    sb.append(x).replace(0, 19, "zip_");
+//                    ZipEntry entry = new ZipEntry(String.valueOf(sb));
+//                    zops.putNextEntry(entry);
+//                    byte[] buffer = new byte[fips.available()];
+//                    fips.read(buffer);
+//                    zops.write(buffer);
+//                    zops.closeEntry();
+//                    fips.close();
+//                } catch (IOException e) {
+//                    e.getMessage();
+//                }
+//            });
+//        } catch (IOException e) {
+//            e.getMessage();
+//        }
+//
+//    }
+
 
     private static void deleteFiles(List<String> path) {
         int count = 0;
